@@ -23,6 +23,7 @@ if version_info[0] == 3:
 logger = logger.getChild('plugins')
 
 from searx.plugins import (oa_doi_rewrite,
+                           code_sample,
                            https_rewrite,
                            infinite_scroll,
                            open_results_on_new_tab,
@@ -86,3 +87,4 @@ plugins.register(self_info)
 plugins.register(search_on_category_select)
 plugins.register(tracker_url_remover)
 plugins.register(vim_hotkeys)
+plugins.register(code_sample)
