@@ -11,7 +11,10 @@ url = 'https://api.stackexchange.com/2.2/questions/{ids}/answers?order=desc&sort
 question_re = r"\/(?:questions|q)\/(?P<id>\d+)"
 
 def post_search(request, search):
-    google = search.result_container.results['google']
+    try:
+        google = search.result_container.results.get('google', {})
+    except Exception:
+        google = {}
 
     relevant = {}
     for result in google:
