@@ -3,11 +3,12 @@ import re
 import requests
 
 name = "Stackoverflow answers infobox"
-description = gettext("Combines multiple search engines in order to show a infobox... ")
+description = gettext("Shows an infobox containing the possible answer for the question.")
 default_on = True
 
-url = 'https://api.stackexchange.com/2.2/questions/{ids}/answers?order=desc&sort=activity&site=stackoverflow&filter=!-*jbN.OXKfDP'
+js_dependencies = ('plugins/js/stackoverflow_infobox.js',)
 
+url = 'https://api.stackexchange.com/2.2/questions/{ids}/answers?order=desc&sort=activity&site=stackoverflow&filter=!-*jbN.OXKfDP'
 question_re = r"\/(?:questions|q)\/(?P<id>\d+)"
 
 def post_search(request, search):
@@ -36,9 +37,9 @@ def post_search(request, search):
                     'title': "Stackoverflow"
                 }]
                 info_test = {
-                    'infobox': answer.get('title', 'Deu zica!'),
-                    'engine': "wikipedia",
-                    'content': answer.get('body', 'Deuzica2'),
+                    'infobox': answer.get('title', ' '),
+                    'engine': "StackOverFlow",
+                    'content': answer.get('body', ' '),
                     'urls': links,
                 }
                 search.result_container.infoboxes.append(info_test)
